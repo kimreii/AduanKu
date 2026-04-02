@@ -3,7 +3,7 @@ import joblib
 import numpy as np
 
 st.title("📣 AduanKu")
-st.write("Analisis Sentimen Ulasan Pengguna")
+st.write("Ulasan Pengguna pada AduanKu")
 
 model = joblib.load("model.joblib")
 tfidf = model.named_steps['tfidf']
@@ -14,11 +14,11 @@ def get_keywords(text):
     indices = np.argsort(vec.toarray()[0])[-5:]
     return [feature_names[i] for i in indices]
 
-text = st.text_area("Masukkan ulasan:")
+text = st.text_area("Masukkan komentar:")
 
 if st.button("Analisis"):
     if text.strip() == "":
-        st.warning("Teks tidak boleh kosong!")
+        st.warning("Tidak boleh kosong!")
     else:
         pred = model.predict([text])[0]
         st.success(f"Sentimen: {pred}")
